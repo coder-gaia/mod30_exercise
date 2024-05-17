@@ -15,13 +15,13 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
-import br.com.alexandreG.dao.jpa.IProdutoJpaDAO;
-import br.com.alexandreG.dao.jpa.ProdutoJpaDAO;
-import br.com.alexandreG.domain.jpa.ProdutoJpa;
-import br.com.alexandreG.exceptions.DAOException;
-import br.com.alexandreG.exceptions.MaisDeUmRegistroException;
-import br.com.alexandreG.exceptions.TableException;
-import br.com.alexandreG.exceptions.TipoChaveNaoEncontradaException;
+import br.com.alexandreG.DAO.JPA.IProdutoJpaDAO;
+import br.com.alexandreG.DAO.JPA.ProdutoJpaDAO;
+import br.com.alexandreG.DOMAIN.JPA.ProdutoJpa;
+import br.com.alexandreG.EXCEPTIONS.DAOException;
+import br.com.alexandreG.EXCEPTIONS.MaisDeUmRegistroException;
+import br.com.alexandreG.EXCEPTIONS.TableException;
+import br.com.alexandreG.EXCEPTIONS.TipoChaveNaoEncontradaException;
 
 public class ProdutoJpaDAOTest {
 

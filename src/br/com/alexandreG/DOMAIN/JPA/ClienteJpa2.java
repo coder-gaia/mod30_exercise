@@ -10,10 +10,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "TB_CLIENTE")
-public class ClienteJpa implements Persistente {
+public class ClienteJpa2 implements Persistente {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="cliente_seq")
+    //@GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="cliente_seq")
     @SequenceGenerator(name="cliente_seq", sequenceName="sq_cliente", initialValue = 1, allocationSize = 1)
     private Long id;
 
@@ -86,5 +87,4 @@ public class ClienteJpa implements Persistente {
     public void setId(Long id) {
         this.id = id;
     }
-
 }

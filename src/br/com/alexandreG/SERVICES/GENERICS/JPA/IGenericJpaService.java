@@ -6,11 +6,11 @@ package br.com.alexandreG.SERVICES.GENERICS.JPA;
 import java.io.Serializable;
 import java.util.Collection;
 
-import br.com.alexandreG.dao.Persistente;
-import br.com.alexandreG.exceptions.DAOException;
-import br.com.alexandreG.exceptions.MaisDeUmRegistroException;
-import br.com.alexandreG.exceptions.TableException;
-import br.com.alexandreG.exceptions.TipoChaveNaoEncontradaException;
+import br.com.alexandreG.DAO.Persistente;
+import br.com.alexandreG.EXCEPTIONS.DAOException;
+import br.com.alexandreG.EXCEPTIONS.MaisDeUmRegistroException;
+import br.com.alexandreG.EXCEPTIONS.TableException;
+import br.com.alexandreG.EXCEPTIONS.TipoChaveNaoEncontradaException;
 
 public interface IGenericJpaService <T extends Persistente, E extends Serializable> {
 

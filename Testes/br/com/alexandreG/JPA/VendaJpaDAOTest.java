@@ -19,28 +19,28 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.alexandreG.dao.VendaExclusaoJpaDAO;
-import br.com.alexandreG.dao.jpa.ClienteJpaDAO;
-import br.com.alexandreG.dao.jpa.IClienteJpaDAO;
-import br.com.alexandreG.dao.jpa.IProdutoJpaDAO;
-import br.com.alexandreG.dao.jpa.IVendaJpaDAO;
-import br.com.alexandreG.dao.jpa.ProdutoJpaDAO;
-import br.com.alexandreG.dao.jpa.VendaJpaDAO;
-import br.com.alexandreG.domain.jpa.ClienteJpa;
-import br.com.alexandreG.domain.jpa.ProdutoJpa;
-import br.com.alexandreG.domain.jpa.VendaJpa;
-import br.com.alexandreG.domain.jpa.VendaJpa.Status;
-import br.com.alexandreG.exceptions.DAOException;
-import br.com.alexandreG.exceptions.MaisDeUmRegistroException;
-import br.com.alexandreG.exceptions.TableException;
-import br.com.alexandreG.exceptions.TipoChaveNaoEncontradaException;
+
+import br.com.alexandreG.DAO.JPA.ClienteJpaDAO;
+import br.com.alexandreG.DAO.JPA.IClienteJpaDAO;
+import br.com.alexandreG.DAO.JPA.IProdutoJpaDAO;
+import br.com.alexandreG.DAO.JPA.IVendaJpaDAO;
+import br.com.alexandreG.DAO.JPA.ProdutoJpaDAO;
+import br.com.alexandreG.DAO.JPA.VendaJpaDAO;
+import br.com.alexandreG.DOMAIN.JPA.ClienteJpa;
+import br.com.alexandreG.DOMAIN.JPA.ProdutoJpa;
+import br.com.alexandreG.DOMAIN.JPA.VendaJpa;
+import br.com.alexandreG.DOMAIN.JPA.VendaJpa.Status;
+import br.com.alexandreG.EXCEPTIONS.DAOException;
+import br.com.alexandreG.EXCEPTIONS.MaisDeUmRegistroException;
+import br.com.alexandreG.EXCEPTIONS.TableException;
+import br.com.alexandreG.EXCEPTIONS.TipoChaveNaoEncontradaException;
 
 public class VendaJpaDAOTest {
     private IVendaJpaDAO vendaDao;
 
     private IVendaJpaDAO vendaExclusaoDao;
 
-    private IClienteJpaDAO clienteDao;
+    private IClienteJpaDAO<C> clienteDao;
 
     private IProdutoJpaDAO produtoDao;
 
@@ -52,7 +52,7 @@ public class VendaJpaDAOTest {
 
     public VendaJpaDAOTest() {
         this.vendaDao = new VendaJpaDAO();
-        vendaExclusaoDao = new VendaExclusaoJpaDAO();
+        /*vendaExclusaoDao = new VendaExclusaoJpaDAO();*/
         this.clienteDao = new ClienteJpaDAO();
         this.produtoDao = new ProdutoJpaDAO();
         rd = new Random();

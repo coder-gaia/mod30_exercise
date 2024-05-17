@@ -6,11 +6,12 @@ package br.com.alexandreG.DAO.GENERIC.JPA;
 import java.io.Serializable;
 import java.util.Collection;
 
-import br.com.alexandreG.dao.Persistente;
-import br.com.alexandreG.exceptions.DAOException;
-import br.com.alexandreG.exceptions.MaisDeUmRegistroException;
-import br.com.alexandreG.exceptions.TableException;
-import br.com.alexandreG.exceptions.TipoChaveNaoEncontradaException;
+import br.com.alexandreG.DAO.Persistente;
+import br.com.alexandreG.DOMAIN.JPA.ClienteJpa2;
+import br.com.alexandreG.EXCEPTIONS.DAOException;
+import br.com.alexandreG.EXCEPTIONS.MaisDeUmRegistroException;
+import br.com.alexandreG.EXCEPTIONS.TableException;
+import br.com.alexandreG.EXCEPTIONS.TipoChaveNaoEncontradaException;
 
 public interface IGenericJapDAO <T extends Persistente, E extends Serializable> {
 
@@ -22,7 +23,7 @@ public interface IGenericJapDAO <T extends Persistente, E extends Serializable> 
      * @throws TipoChaveNaoEncontradaException
      * @throws DAOException
      */
-    public T cadastrar(T entity) throws TipoChaveNaoEncontradaException, DAOException;
+    public T cadastrar(ClienteJpa2 entity) throws TipoChaveNaoEncontradaException, DAOException;
 
     /**
      * Método para excluir um registro do banco de dados

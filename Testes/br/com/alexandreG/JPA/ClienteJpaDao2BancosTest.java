@@ -4,39 +4,56 @@
 
 package br.com.alexandreG.JPA;
 
-import static org.junit.Assert.assertTrue;
-
-import java.util.Collection;
-import java.util.Random;
-
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Test;
 
 import br.com.alexandreG.DAO.JPA.ClienteJpaDAO;
+import br.com.alexandreG.DAO.JPA.ClienteJpaDB2DAO;
 import br.com.alexandreG.DAO.JPA.IClienteJpaDAO;
 import br.com.alexandreG.DOMAIN.JPA.ClienteJpa;
 import br.com.alexandreG.EXCEPTIONS.DAOException;
 import br.com.alexandreG.EXCEPTIONS.MaisDeUmRegistroException;
 import br.com.alexandreG.EXCEPTIONS.TableException;
 import br.com.alexandreG.EXCEPTIONS.TipoChaveNaoEncontradaException;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Test;
 
-public class ClienteJpaDAOTest {
-    private IClienteJpaDAO<C> clienteDao;
+import java.util.Collection;
+import java.util.Random;
+
+import static org.junit.Assert.assertTrue;
+
+public class ClienteJpaDao2BancosTest {
+    private ClienteJpaDAO clienteDao;
+
+    private IClienteJpaDAO<ClienteJpa> clienteDB2Dao;
 
     private Random rd;
 
-    public void ClienteJpaDaoTest() {
+    public ClienteJpaDao2BancosTest() {
         this.clienteDao = new ClienteJpaDAO();
+        this.clienteDB2Dao = new ClienteJpaDB2DAO();
         rd = new Random();
     }
 
     @After
     public void end() throws DAOException {
-        Collection<ClienteJpa> list = clienteDao.buscarTodos();
+        Collection<ClienteJpa> list1 = clienteDao.buscarTodos();
+        excluir1(list1);
+
+        Collection<ClienteJpa> list2 = clienteDB2Dao.buscarTodos();
+        excluir2(list2);
+    }
+
+    private void excluir1(Collection<ClienteJpa> list) {
+        list.forEach(cli -> {
+            clienteDao.excluir(cli);
+        });
+    }
+
+    private void excluir2(Collection<ClienteJpa> list) {
         list.forEach(cli -> {
             try {
-                clienteDao.excluir(cli);
+                clienteDB2Dao.excluir(cli);
             } catch (DAOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -51,6 +68,12 @@ public class ClienteJpaDAOTest {
 
         ClienteJpa clienteConsultado = clienteDao.consultar(cliente.getId());
         Assert.assertNotNull(clienteConsultado);
+
+        cliente.setId(null);
+        clienteDB2Dao.cadastrar(cliente);
+
+        ClienteJpa clienteConsultado2 = clienteDB2Dao.consultar(cliente.getId());
+        Assert.assertNotNull(clienteConsultado2);
 
     }
 
@@ -119,12 +142,7 @@ public class ClienteJpaDAOTest {
         assertTrue(list.size() == 2);
 
         list.forEach(cli -> {
-            try {
-                clienteDao.excluir(cli);
-            } catch (DAOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            clienteDao.excluir(cli);
         });
 
         Collection<ClienteJpa> list1 = clienteDao.buscarTodos();

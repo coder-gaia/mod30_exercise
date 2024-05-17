@@ -12,11 +12,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import br.com.alexandreG.dao.Persistente;
-import br.com.alexandreG.exceptions.DAOException;
-import br.com.alexandreG.exceptions.MaisDeUmRegistroException;
-import br.com.alexandreG.exceptions.TableException;
-import br.com.alexandreG.exceptions.TipoChaveNaoEncontradaException;
+import br.com.alexandreG.DAO.Persistente;
+import br.com.alexandreG.DOMAIN.JPA.ClienteJpa2;
+import br.com.alexandreG.EXCEPTIONS.DAOException;
 
 public class GenericJpaDAO <T extends Persistente, E extends Serializable> implements IGenericJapDAO <T,E> {
 
@@ -26,12 +24,12 @@ public class GenericJpaDAO <T extends Persistente, E extends Serializable> imple
 
     private Class<T> persistenteClass;
 
-    public GenericJpaDAO(Class<T> persistenteClass) {
+    public GenericJpaDAO(Class<T> persistenteClass, String postgre1) {
         this.persistenteClass = persistenteClass;
     }
 
     @Override
-    public T cadastrar(T entity) throws TipoChaveNaoEncontradaException, DAOException {
+    public T cadastrar(ClienteJpa2 entity) throws DAOException {
         openConnection();
         entityManager.persist(entity);
         entityManager.getTransaction().commit();
@@ -40,7 +38,7 @@ public class GenericJpaDAO <T extends Persistente, E extends Serializable> imple
     }
 
     @Override
-    public void excluir(T entity) throws DAOException {
+    public void excluir(T entity) {
         openConnection();
         entity = entityManager.merge(entity);
         entityManager.remove(entity);
@@ -49,7 +47,7 @@ public class GenericJpaDAO <T extends Persistente, E extends Serializable> imple
     }
 
     @Override
-    public T alterar(T entity) throws TipoChaveNaoEncontradaException, DAOException {
+    public T alterar(T entity) {
         openConnection();
         entity = entityManager.merge(entity);
         entityManager.getTransaction().commit();
@@ -58,7 +56,7 @@ public class GenericJpaDAO <T extends Persistente, E extends Serializable> imple
     }
 
     @Override
-    public T consultar(E valor) throws MaisDeUmRegistroException, TableException, DAOException {
+    public T consultar(E valor)  {
         openConnection();
         T entity = entityManager.find(this.persistenteClass, valor);
         entityManager.getTransaction().commit();
@@ -67,7 +65,7 @@ public class GenericJpaDAO <T extends Persistente, E extends Serializable> imple
     }
 
     @Override
-    public Collection<T> buscarTodos() throws DAOException {
+    public Collection<T> buscarTodos() {
         openConnection();
         List<T> list =
                 entityManager.createQuery(getSelectSql(), this.persistenteClass).getResultList();
@@ -77,7 +75,7 @@ public class GenericJpaDAO <T extends Persistente, E extends Serializable> imple
 
     protected void openConnection() {
         entityManagerFactory =
-                Persistence.createEntityManagerFactory("ExemploJPA");
+                Persistence.createEntityManagerFactory("ExampleJPA");
         entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
     }
